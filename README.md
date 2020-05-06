@@ -8,6 +8,7 @@ The App takes in a .txt file and displays 1) The full path that that turtle trav
 
 * [React](https://reactjs.org) - JS framework for the front-end Single Page App
 * [Python](https://www.python.org/) - for the back-end App including the API that serves the front-end.
+* [pytest](https://docs.pytest.org/en/latest/) - python testing framework.
 
 ## To run the App on your computer
 
