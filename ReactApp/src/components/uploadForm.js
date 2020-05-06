@@ -39,7 +39,7 @@ function UploadForm(props) {
           alert(result.msg);
         };
       } catch (error) {
-          console.log(error);
+        setmessage(`We are sorry!! something went wrong while uploading the file.\n${error}`);
       };
     };
   };

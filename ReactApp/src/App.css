@@ -31,6 +31,12 @@ main {
   background-color: var(--game-background-color);
 }
 
+canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .container {
   width: 400px;
   margin: 30px 5px 0px 5px;
@@ -43,6 +49,7 @@ main {
 
 form p {
   margin: 10px 0 0 0;
+  white-space: pre-line;
 }
 
 @media screen and (min-width: 1400px) {
