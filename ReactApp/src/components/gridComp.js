@@ -5,6 +5,8 @@ function Grid(props) {
     useEffect(() => {
         const canvas = document.getElementById("myGrid");
         const context = canvas.getContext("2d");
+
+        // canvas size is 2500 by 2500 so the centre (0, 0) is (1250, -1250)
         canvas.width = 2500;
         canvas.height = 2500;
         const bw = canvas.width;

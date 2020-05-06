@@ -6,14 +6,15 @@ import { Path } from "./components/path.js";
 import { UploadForm } from "./components/uploadForm.js";
 
 function App() {
-  const[arraysDic, setarraysDic] = useState({'locationHistory' : [], 'duplicates' : []});
+  // arrayDict stores all location points in locationHistory array and all duplicate points in duplicates array
+  const[arraysDict, setarraysDict] = useState({'locationHistory' : [], 'duplicates' : []});
 
   const updatePoints = (locationHistory, duplicates) => {
     let id = window.setTimeout(() => {}, 0);
     while (id--) {
-    window.clearTimeout(id); // if users upload new file while drawing path from previous file, this will clear the remaining timeouts
+    window.clearTimeout(id); // if user uploads new file while drawing path from previous file, this will clear the remaining timeouts
     };
-    setarraysDic({'locationHistory' : locationHistory, 'duplicates' : duplicates});
+    setarraysDict({'locationHistory' : locationHistory, 'duplicates' : duplicates});
   };
 
   return (
@@ -23,7 +24,7 @@ function App() {
           <Grid />
           <Path
             id={"path"}
-            arraysDic={arraysDic}
+            arraysDict={arraysDict}
             lineColour={"rgb(0, 0, 255)"}
             lineWidth = {4}
             dotSize = {3}
