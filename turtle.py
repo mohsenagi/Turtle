@@ -39,7 +39,7 @@ class Turtle:
             unique.add(location)
         return list(dupes)
     
-    def followPath(self, line):
+    def followDirection(self, line):
         for char in line:
             if char.upper() == 'F':
                 self.move()

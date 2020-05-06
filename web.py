@@ -3,6 +3,9 @@ from flask import Flask, send_from_directory, jsonify, request
 from werkzeug.utils import secure_filename
 from flask_cors import CORS
 from turtle import Turtle
+from pathlib import Path
+
+Path("./uploads").mkdir(parents=True, exist_ok=True)
 UPLOAD_FOLDER = './uploads'
 ALLOWED_EXTENSIONS = {'txt'}
 
@@ -29,9 +32,9 @@ def upload_file():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             newTurtle = Turtle([0, 0], [(0, 0)], 0)
-            with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), "r") as path:
-                line = path.readline()
-            if newTurtle.followPath(line) == 'Sucsess' :
+            with open(os.path.join(app.config['UPLOAD_FOLDER'], filename), "r") as direction:
+                line = direction.readline()
+            if newTurtle.followDirection(line) == 'Sucsess' :
                 os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))
                 return jsonify({'locationHistory' : newTurtle.locationHistory, 'duplicates' : newTurtle.duplicates()}), 200
             else:

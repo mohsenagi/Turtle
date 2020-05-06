@@ -66,11 +66,11 @@ def test_duplicates():
     testTurtle = Turtle([0, 0], [(0, 0), (0, 1), (0, 0), (0, 1)], 0)
     assert testTurtle.duplicates() == [(0, 0), (0, 1)]
 
-def test_followPath():
+def test_followDirection():
     testTurtle = Turtle([0, 0], [(0, 0)], 0)
-    with open ('./text files/lowercase.txt', "r") as path:
-        line = path.readline()
-    assert testTurtle.followPath(line) == 'Sucsess'
+    with open ('./text files/lowercase.txt', "r") as direction:
+        line = direction.readline()
+    assert testTurtle.followDirection(line) == 'Sucsess'
     assert testTurtle.location == [0, 0]
     assert testTurtle.orientation == 180
     assert len(testTurtle.locationHistory) == 31 # lowercase.txt has 30 'F' or 'f'
@@ -81,15 +81,15 @@ def test_followPath():
     assert (0, 3) in testTurtle.duplicates()
     
     testTurtle2 = Turtle([0, 0], [(0, 0)], 0)
-    with open ('./text files/directions-1.txt', "r") as path:
-        line = path.readline()
-    assert testTurtle2.followPath(line) == 'Sucsess'
+    with open ('./text files/directions-1.txt', "r") as direction:
+        line = direction.readline()
+    assert testTurtle2.followDirection(line) == 'Sucsess'
     assert len(testTurtle2.locationHistory) == 555 # direction-1 has 554 'F'
 
     testTurtle3 = Turtle([0, 0], [(0, 0)], 0)
-    with open ('./text files/invalid.txt', "r") as path:
-        line = path.readline()
-    assert testTurtle3.followPath(line) == 'Invalid Character'
+    with open ('./text files/invalid.txt', "r") as direction:
+        line = direction.readline()
+    assert testTurtle3.followDirection(line) == 'Invalid Character'
     assert testTurtle3.location == [0, 0]
     assert testTurtle3.orientation == 0
     assert len(testTurtle3.locationHistory) == 1
