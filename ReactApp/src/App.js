@@ -10,11 +10,6 @@ function App() {
   const[arraysDict, setarraysDict] = useState({'locationHistory' : [], 'duplicates' : []});
 
   const updatePoints = (locationHistory, duplicates) => {
-    let id = setInterval(() => {}, 0);
-    while (id) {
-    clearInterval(id); // if user uploads new file while drawing path from previous file, this will clear the interval
-    id--
-    };
     setarraysDict({'locationHistory' : locationHistory, 'duplicates' : duplicates});
   };
 
