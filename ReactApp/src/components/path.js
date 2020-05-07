@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 function Path(props) {
     let {id, arraysDict, lineColour, lineWidth, dotSize, dotColor} = props;
-    console.log(id)
 
     useEffect(() => {
         let locationHistory = arraysDict.locationHistory;
