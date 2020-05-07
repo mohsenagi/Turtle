@@ -13,7 +13,7 @@ function Path(props) {
         canvas.width = 2500;
         canvas.height = 2500;
         
-        context.clearRect(0, 0, canvas.width, canvas.height);
+        // context.clearRect(0, 0, canvas.width, canvas.height);
 
         const drawDot = (centerX, centerY, dotSize, dotColor, lineWidth, timeFactor) => {
             
@@ -31,45 +31,49 @@ function Path(props) {
         };
         
         const drawStep = (startIndex, locationHistory, lineWidth, lineColour, duplicates, dotSize, dotColor) => {
-            let [startX, startY] = locationHistory[startIndex];
-            if (startIndex === locationHistory.length-1) {
+            if (locationHistory.length > 0){
+                let [startX, startY] = locationHistory[startIndex];
+                if (startIndex === locationHistory.length-1) {
+    
+                    // setTimeout is used to delay the drawing of the final point after the path is drawn
+                    setTimeout(() => {
+                        drawDot(startX, startY, dotSize*3, "rgb(0, 0, 0)", 0);
+                    }, 500);
+    
+                    // setTimeout is used to delay the drawing of the duplicate points after the path and final point are drawn
+                    setTimeout(() => {
+                        for (let j = 0; j < duplicates.length; j++) {
+                            drawDot(duplicates[j][0], duplicates[j][1], dotSize, dotColor, lineWidth, 50);
+                        };
+                    }, 750);
 
-                // setTimeout is used to delay the drawing of the final point after the path is drawn
-                setTimeout(() => {
-                    drawDot(startX, startY, dotSize*3, "rgb(0, 0, 0)", 0);
-                }, startIndex*10+500);
-
-                // setTimeout is used to delay the drawing of the duplicate points after the path and final point are drawn
-                setTimeout(() => {
-                    for (let j = 0; j < duplicates.length; j++) {
-                        drawDot(duplicates[j][0], duplicates[j][1], dotSize, dotColor, lineWidth, 50);
-                    };
-                }, startIndex*10+750);
-            
-            } else {
-                let [endX, endY] = locationHistory[startIndex+1];
+                    clearInterval(interval);
                 
-                // convert location's X and Y to the corresponding point on Canvas
-                let startXCanvas = 1250+startX*20;
-                let startYCanvas = 1250-startY*20;
-                let endXCanvas = 1250+endX*20;
-                let endYCanvas = 1250-endY*20;
-                
-                // setTimeout is used to animate the drawing of the path
-                setTimeout(() => {
+                } else {
+                    let [endX, endY] = locationHistory[startIndex+1];
+                    
+                    // convert location's X and Y to the corresponding point on Canvas
+                    let startXCanvas = 1250+startX*20;
+                    let startYCanvas = 1250-startY*20;
+                    let endXCanvas = 1250+endX*20;
+                    let endYCanvas = 1250-endY*20;
+                    
                     context.lineWidth = lineWidth;
                     context.strokeStyle = lineColour;
                     context.beginPath();
                     context.moveTo(startXCanvas, startYCanvas);
                     context.lineTo(endXCanvas, endYCanvas);
                     context.stroke();
-                }, (startIndex+1)*10);
-            };
+                    i+=1;
+                };
+            } else {
+                clearInterval(interval)
+            }
         };
 
-        for (let i = 0; i < locationHistory.length; i++) {
-            drawStep(i, locationHistory, lineWidth, lineColour, duplicates, dotSize, dotColor);
-        };
+        let i = 0;
+        // setInterval is used to animate the drawing of the path
+        let interval = setInterval(() => drawStep(i, locationHistory, lineWidth, lineColour, duplicates, dotSize, dotColor), 10);
     });
 
     return (
